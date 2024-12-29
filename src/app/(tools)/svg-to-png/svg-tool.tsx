@@ -1,7 +1,7 @@
 "use client";
+import { useLocalStorage } from "@/hooks/use-local-storage";
 import { usePlausible } from "next-plausible";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useLocalStorage } from "@/hooks/use-local-storage";
 
 import { UploadBox } from "@/components/shared/upload-box";
 import { SVGScaleSelector } from "@/components/svg-scale-selector";
@@ -93,7 +93,12 @@ function SVGRenderer({ svgContent }: SVGRendererProps) {
     }
   }, [svgContent]);
 
-  return <div ref={containerRef} />;
+  return (
+    <div
+      className="rounded-lg border border-white/5 p-8 shadow-lg"
+      ref={containerRef}
+    />
+  );
 }
 
 function SaveAsPngButton({
@@ -131,11 +136,11 @@ function SaveAsPngButton({
   );
 }
 
+import { FileDropzone } from "@/components/shared/file-dropzone";
 import {
   type FileUploaderResult,
   useFileUploader,
 } from "@/hooks/use-file-uploader";
-import { FileDropzone } from "@/components/shared/file-dropzone";
 
 function SVGToolCore(props: { fileUploaderProps: FileUploaderResult }) {
   const { rawContent, imageMetadata, handleFileUploadEvent, cancel } =
